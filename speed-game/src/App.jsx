@@ -5,15 +5,21 @@ import Circle from './UIcomponents/Circle'
 import Game from './components/Game'
 import GameOver from './components/GameOver'
 
+function getRandomInt(min,max) {
+  return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
 function App() {
   const [player, setPlayer] = useState();
   const [circles, setCircles] = useState([]);
   const [score, setScore] = useState(0)
-  const [gameOn, setGameOn] = useState(false)
   const [gameLaunch, setGameLaunch] = useState(true)
-  const [gameEnd, setGameEnd] = useState(false) 
+  const [gameOn, setGameOn] = useState(false)
+  const [gameEnd, setGameEnd] = useState(false)
+  const [current, setCurrent] = useState(-1);
 
-
+  let timer;
+  let pace = 1000;
 
   function gameSetHandler(level, name) {
     //based on levels, find the matching object
@@ -34,35 +40,60 @@ function App() {
         name: name
       }
     )
-
+    
     setGameOn(!gameOn);
-    setGameLaunch(!gameLaunch)
+    setGameLaunch(!gameLaunch);
+    randomNumb();
+
   }
 
   function stopHandler() {
     setGameOn(!gameOn);
     setGameEnd(!gameEnd);
+    clearTimeout(timer);
+  }
+
+  function playAgainHandler() {
+    setGameEnd(!gameEnd);
+    setGameOn(!gameOn);
   }
 
   function backHandler() {
     setGameEnd(!gameEnd);
-    setGameOn(!gameOn)
+    setGameLaunch(!gameLaunch);
+  }
+
+  const circleClickHandler = (id) => {
+    setScore(score + 1)
+  }
+
+  function randomNumb() {
+    let nextActive;
+    do {
+      nextActive = getRandomInt(0, circles.length)
+    } while (nextActive === current);
+
+    setCurrent(nextActive);
+
+    timer = setTimeout(randomNumb,pace)
   }
 
   return (
     <>
-      <h1>Catch the snow!</h1>
-
-      {gameLaunch && <NewGame onclick={gameSetHandler} />}
+      {gameLaunch && <NewGame 
+      onclick={gameSetHandler}/>}
 
       {gameOn && <Game 
       score={score}
       circles={circles}
-      stopHandler={stopHandler} />}
+      stopHandler={stopHandler} 
+      circleClickHandler={circleClickHandler} />}
 
       {gameEnd && <GameOver
-      backHandler={backHandler} />}
-      
+      playAgainHandler={playAgainHandler}
+      backHandler={backHandler}
+      name={player.name}
+      level={player.level}/>}
     </>
   )
 }

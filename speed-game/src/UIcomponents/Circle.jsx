@@ -1,7 +1,8 @@
-function Circle() {
+function Circle({id, circleClickHandler}) {
     return (
-        <div className="circle">
-            CIRCLE
+        <div className="circle" 
+        onClick={()=>{circleClickHandler(id)}}>
+            <p>{id}</p>
         </div>
     )
 }

@@ -9,6 +9,7 @@ function NewGame({onclick}) {
  
     return (
     <div>
+        <h1>Catch the snow!</h1>
         <h2>Start a game by choosing difficulty level and enter your name</h2>
         <input type="text" onChange={inputHandler}></input>
         <div>
