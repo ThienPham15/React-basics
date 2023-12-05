@@ -1,6 +1,7 @@
-function Circle({id, circleClickHandler}) {
+function Circle({id, circleClickHandler, current}) {
     return (
-        <div className="circle" 
+        <div 
+        className={`circle ${current ? 'active': ''}`}
         onClick={()=>{circleClickHandler(id)}}>
             <p>{id}</p>
         </div>
