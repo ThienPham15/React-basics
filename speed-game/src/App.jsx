@@ -125,7 +125,8 @@ function App() {
       //playAgainHandler={playAgainHandler}
       backHandler={backHandler}
       name={player.name}
-      level={player.level}/>}
+      level={player.level}
+      score={score}/>}
     </>
   )
 }
