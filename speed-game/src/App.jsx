@@ -21,7 +21,7 @@ function App() {
   const rounds = useRef(0);
   const currentInst = useRef(0);
 
-  let pace = 1000;
+  let pace = 2000;
   let levelCircles;
 
   function gameSetHandler(level, name) {
@@ -46,13 +46,13 @@ function App() {
         name: name
       }
     )
-    //setGameLaunch(!gameLaunch); 
+
     //check first the lastest state and change it - as a safer way 
     setGameLaunch((prevLaunch) => !prevLaunch); 
-
     setGameOn(!gameOn);
     randomNumb();
   }
+
 
   function stopHandler() {
     clearTimeout(timeoutIdRef.current);
@@ -60,15 +60,15 @@ function App() {
 
     setGameOn((prevOn) => !prevOn);
     setGameEnd((prevEnd) => !prevEnd);
-    pace = 1000;
+    pace = 2000;
     rounds.current = null;
   }
 
-  function playAgainHandler() {
+/*   function playAgainHandler() {
     setGameEnd((preEnd) => !preEnd);
     setGameOn((preOn) => !preOn);
     setScore(0);
-  }
+  } */
 
   function backHandler() {
     setGameEnd((preEnd) => !preEnd);
@@ -122,7 +122,7 @@ function App() {
       current = {current}/>}
 
       {gameEnd && <GameOver
-      playAgainHandler={playAgainHandler}
+      //playAgainHandler={playAgainHandler}
       backHandler={backHandler}
       name={player.name}
       level={player.level}/>}

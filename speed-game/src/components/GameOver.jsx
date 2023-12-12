@@ -5,8 +5,7 @@ function GameOver({backHandler, playAgainHandler, name, level}) {
             <div>Player: {name} </div>
             <div>Level: {level}</div>
             <div>Score: </div>
-            <div>Texttttttt here!!</div>
-            <button onClick={playAgainHandler}>Play again</button>
+{/*             <button onClick={playAgainHandler}>Play again</button> */}
             <button onClick={backHandler}>Back</button>
         </div>
     )
